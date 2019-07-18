@@ -1,0 +1,8 @@
+-------------------------------------------------------------------------------
+Test set: com.cesar.ejercicio.MovieServiceTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0 s <<< FAILURE! - in com.cesar.ejercicio.MovieServiceTest
+searchMoviebyName_withExistingName_returnsMovieName(com.cesar.ejercicio.MovieServiceTest)  Time elapsed: 0 s  <<< ERROR!
+java.lang.NullPointerException
+	at com.cesar.ejercicio.MovieServiceTest.searchMoviebyName_withExistingName_returnsMovieName(MovieServiceTest.java:24)
+
