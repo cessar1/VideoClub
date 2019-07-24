@@ -75,17 +75,20 @@ public class MovieServiceTest {
         movieService.save(null);
 
     }
-/**
+
  @Test public void update_withExistingName_returnsMovie() {
  Movie movie = new Movie();
  movie.setName("Los Simuladores");
+ movie.setCountry("Argentina");
+ movie.setDirector("Un Tipo");
+ movie.setReleaseDate("4 de abril");
 
- Movie newMovie = new movieService.update(movie);
+ Movie newMovie = movieService.update(movie);
+
  assertThat(newMovie.getName() == movie.getName()).isTrue();
 
 
  }
- **/
 }
 
 
