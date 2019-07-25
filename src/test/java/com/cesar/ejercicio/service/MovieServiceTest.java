@@ -76,19 +76,38 @@ public class MovieServiceTest {
 
     }
 
- @Test public void update_withExistingName_returnsMovie() {
- Movie movie = new Movie();
- movie.setName("Los Simuladores");
- movie.setCountry("Argentina");
- movie.setDirector("Un Tipo");
- movie.setReleaseDate("4 de abril");
+    @Test
+    public void update_withValidId_returnsMovie() {
+        Long id = 1L;
+        Movie movie = new Movie();
+        movie.setName("Los Simuladores");
+        movie.setCountry("Argentina");
+        movie.setDirector("Un Tipo");
+        movie.setReleaseDate("4 de abril");
 
- Movie newMovie = movieService.update(movie);
+        Movie newMovie = movieService.update(id,movie);
 
- assertThat(newMovie.getName() == movie.getName()).isTrue();
+        assertThat(newMovie.getName() == movie.getName()).isTrue();
 
 
- }
+    }
+
+    @Test
+    public void update_withInvalidId_returnNull() {
+        Long id = 5L;
+        Movie movie = new Movie();
+        movie.setName("Los Simuladores");
+        movie.setCountry("Argentina");
+        movie.setDirector("Un Tipo");
+        movie.setReleaseDate("4 de abril");
+
+        Movie newMovie = movieService.update(id, movie);
+
+        assertThat(newMovie).isNull();
+
+    }
+
+
 }
 
 

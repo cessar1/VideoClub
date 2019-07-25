@@ -32,4 +32,15 @@ public class MovieRestController {
         }
         return movie;
     }
+/*
+    @PutMapping("/{id}")
+    public Movie update(@PathVariable Long id, @RequestBody Movie movie ){
+
+        if(newMovie == null || newMovie == null){
+            throw new InvalidMovieException("Invalid Movie");
+        }
+        return movie;
+    }
+*/
+
 }

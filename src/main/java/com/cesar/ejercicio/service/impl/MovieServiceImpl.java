@@ -39,11 +39,21 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public Movie update(Movie movie) {
-        if (movie.getName() != null) {
-            movieRepository.save(movie);
+    public Movie update(Long id, Movie movie) {
+
+        Movie movieToModify =  movieRepository.findById(id).orElse(null);
+
+        if (movieToModify != null) {
+            movieToModify.setName(movie.getName());
+            movieToModify.setReleaseDate(movie.getReleaseDate());
+            movieToModify.setCountry(movie.getCountry());
+            movieToModify.setDirector(movie.getDirector());
+
+            movieRepository.save(movieToModify);
         }
         return null;
     }
+
+
 
 }
