@@ -15,6 +15,11 @@ public class MovieRestController {
     @Autowired
     private MovieService movieService;
 
+    @GetMapping("/{pageNumber}")
+    public List<Movie> findInPagesSortedByName(@PathVariable int pageNumber){
+        return movieService.findInPagesSortedByName(pageNumber);
+    }
+
     @GetMapping("/{name}")
     public Movie searchByName(@PathVariable String name){
         Movie movie = movieService.searchByName(name);
