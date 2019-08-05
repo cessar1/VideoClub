@@ -4,11 +4,15 @@ package com.cesar.ejercicio.service;
 import com.cesar.ejercicio.domain.Movie;
 import com.cesar.ejercicio.exception.InvalidMovieException;
 import com.cesar.ejercicio.exception.InvalidNameException;
+import com.cesar.ejercicio.repository.MovieRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.awt.print.Pageable;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -19,6 +23,29 @@ public class MovieServiceTest {
 
     @Autowired
     private MovieService movieService;
+    @Autowired
+    private MovieRepository movieRepository;
+
+    @Test
+    public void findInPagesSortedByName_withValidPageNumber_returnMovies(){
+        int pageNumber = 0;
+
+        List<Movie> moviesInPageOne = movieService.findInPagesSortedByName(pageNumber);
+
+        assertThat(moviesInPageOne.size()).isEqualTo(3);
+
+    }
+
+    @Test
+    public void findInPagesSortedByName_withInvalidPageNumber_returnEmptyList(){
+        int pageNumber = 1;
+
+        List<Movie> moviesInPageOne = movieService.findInPagesSortedByName(pageNumber);
+
+        assertThat(moviesInPageOne.size()).isEqualTo(0);
+
+    }
+
 
     @Test
     public void searchByName_withExistingName_returnsMovieName() {
@@ -77,7 +104,7 @@ public class MovieServiceTest {
     }
 
     @Test
-    public void update_withValidId_returnsMovie() {
+    public void update_withValidIdAndMovie_returnsMovie() {
         Long id = 1L;
         Movie movie = new Movie();
         movie.setName("Los Simuladores");
@@ -85,9 +112,10 @@ public class MovieServiceTest {
         movie.setDirector("Un Tipo");
         movie.setReleaseDate("4 de abril");
 
-        Movie newMovie = movieService.update(id,movie);
+        Movie newMovie = movieService.update(id, movie);
 
-        assertThat(newMovie.getName() == movie.getName()).isTrue();
+        assertThat(newMovie).isNotNull();
+        assertThat(newMovie.getName()).isEqualTo(movie.getName());
 
 
     }
@@ -105,6 +133,27 @@ public class MovieServiceTest {
 
         assertThat(newMovie).isNull();
 
+    }
+
+    @Test
+    public void update_withInvalidMovie_returnNull() {
+        Long id = 1L;
+        Movie movie = new Movie();
+
+        Movie newMovie = movieService.update(id, movie);
+
+        assertThat(newMovie).isNull();
+
+    }
+
+    @Test
+    public void deleteById_withValidId_deleteMovie() {
+        Long id = 1L;
+
+        movieService.deleteById(id);
+
+        List<Movie> movies = movieRepository.findAll();
+        assertThat(movies.size()).isEqualTo(2);
     }
 
 

@@ -11,7 +11,8 @@ CREATE TABLE movie (
 );
 CREATE TABLE actor (
     id BIGINT IDENTITY PRIMARY KEY,
-    id_movie BIGINT FOREIGN KEY REFERENCES movie,
+    id_movie BIGINT FOREIGN KEY REFERENCES movie
+    ON DELETE CASCADE,
     firstname VARCHAR(50),
     lastname VARCHAR(50)
 
